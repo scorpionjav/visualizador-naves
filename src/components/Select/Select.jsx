@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import './Select.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import * as starshipActions from './../../store/modules/starship/actions';
+import starshipGellAllAsyncActionCreator from './../../store/modules/starship/actions.get-all';
+import starshipSelectedAsyncActionCreator from './../../store/modules/starship/actions.selected';
 
 const Select = () => {
 
@@ -9,13 +10,13 @@ const Select = () => {
   const starships = useSelector(store => store.starship.starshipGetAll);
 
   useEffect(() => {
-      dispatch(starshipActions.starshipGellAllAsyncActionCreator());
+      dispatch(starshipGellAllAsyncActionCreator());
   }, [dispatch]);
 
   const handleSelect = (e) => {
     e.persist();
     const index = e.target.value;
-    index !== 'default' && dispatch(starshipActions.starshipSelectedActionCreator(starships.data[index]));
+    index !== 'default' && dispatch(starshipSelectedAsyncActionCreator(starships.data[index]));
   };
 
   return (
